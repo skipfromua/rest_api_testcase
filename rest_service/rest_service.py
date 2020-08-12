@@ -1,22 +1,19 @@
-from flask import Flask, request, abort, jsonify
-import json
-from .dropbox_api import download, upload, dbx_object
+from flask import Flask, request
+from .handlers import upload_data_handler, download_data_handler
 
 
 app = Flask(__name__)
 
 
-@app.route('/binaryFile/<int:key_value>', methods=['GET'])
+@app.route('/v1/file/download/<int:key_value>', methods=['GET'])
 def hello_world(key_value):
-    data = download(dbx_object, '{}.json'.format(key_value))
-    print(data)
-    return jsonify({key_value: data.decode('utf-8')})
+    return download_data_handler(key_value)
 
 
-@app.route('/createBinaryFile', methods=['POST'])
+@app.route('/v1/file/upload', methods=['POST'])
 def post_request():
-    if not request.json:
-        abort(400)
-    print(request.json)
-    upload(dbx_object, '{}.json'.format(request.json['key_value']), request.json['data'])
-    return json.dumps(request.json)
+    return upload_data_handler(request)
+
+
+if __name__ == '__main__':
+    app.run()

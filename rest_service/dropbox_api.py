@@ -9,7 +9,8 @@ def upload(dbx_object, name, data_to_save, overwrite=True):
     mode = (dropbox.files.WriteMode.overwrite
             if overwrite
             else dropbox.files.WriteMode.add)
-    data = data_to_save.encode()
+    data = data_to_save
+    print(data)
     res = dbx_object.files_upload(
         data, path, mode,
         mute=True)
