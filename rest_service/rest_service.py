@@ -1,5 +1,5 @@
 from flask import Flask, request
-from .handlers import upload_data_handler, download_data_handler
+from handlers import upload_data_handler, download_data_handler
 
 
 app = Flask(__name__)

@@ -1,13 +1,13 @@
-from .dropbox_api import download, upload, dbx_object
+from dropbox_api import download, upload, dbx_object
 from flask import jsonify, json, abort
 
 
 def download_data_handler(key_value):
-    data = download(dbx_object, '{}'.format(key_value))
-    return jsonify(data.decode('utf-8'))
+    data = download(dbx_object, str(key_value))
+    return jsonify(data.decode())
 
 
-def upload_data_handler(request):
+def upload_data_handler(request, data=None):
     if request.headers['Content-Type'] == 'text/plain':
         return "200 Key-value:{}".format(_text_plain_parse(request))
 
