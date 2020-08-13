@@ -1,6 +1,6 @@
 import dropbox
-from config import API_TOKEN, CACHING_ON
-from local_storage_mongo import unloaded_data, cached_data
+from .config import API_TOKEN, CACHING_ON
+from .local_storage_mongo import unloaded_data, cached_data
 from requests.exceptions import ConnectionError
 
 dbx_object = dropbox.Dropbox(API_TOKEN)
